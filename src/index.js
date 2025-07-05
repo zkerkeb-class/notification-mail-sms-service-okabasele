@@ -1,6 +1,22 @@
-const helloYou = (name) => {
-  name = "you" || name
-  console.log("hello" + name + "!")
-}
+require("dotenv").config()
+const express = require("express")
+const env = require("./config/env")
+const apiRouter = require("./routes")
+const errorHandling = require("./middlewares/errorHandling")
+const logger = require("./middlewares/logger")
 
-helloYou("world") // hello world!
+const app = express()
+
+app.use(express.json())
+app.use(logger)
+app.use("/api", apiRouter)
+
+app.get("/", (_, res) => {
+  res.send("Notification Service API")
+})
+
+app.use(errorHandling)
+
+app.listen(env.PORT, () => {
+  console.log(`Notification Service running on port ${env.PORT}`)
+})

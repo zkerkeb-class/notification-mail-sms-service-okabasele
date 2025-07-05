@@ -1,0 +1,33 @@
+require("dotenv").config()
+
+const {
+  PORT,
+  MAILPIT_HOST,
+  MAILPIT_PORT,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN,
+  TWILIO_PHONE_NUMBER,
+  RGPD_UNSUBSCRIBE_URL
+} = process.env
+
+if (
+  !PORT ||
+  !MAILPIT_HOST ||
+  !MAILPIT_PORT ||
+  !TWILIO_ACCOUNT_SID ||
+  !TWILIO_AUTH_TOKEN ||
+  !TWILIO_PHONE_NUMBER ||
+  !RGPD_UNSUBSCRIBE_URL
+) {
+  throw new Error("Missing environment variables")
+}
+
+module.exports = {
+  PORT: parseInt(PORT),
+  MAILPIT_HOST,
+  MAILPIT_PORT,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN,
+  TWILIO_PHONE_NUMBER,
+  RGPD_UNSUBSCRIBE_URL
+}
